@@ -4,7 +4,8 @@
   "description": "js, node, blood37",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "prod": "node index.js"
   },
   "author": "xBlood37 (daniil bobrov)",
   "license": "ISC",
