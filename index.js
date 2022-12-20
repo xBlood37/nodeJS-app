@@ -1,11 +1,26 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const weatherRequest = require("./requests/weather.request");
 
 const app = express();
 
+// 78e4fc4dbafe4b36647459125f96133b
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
-  res.end("Hello, world!");
+  res.render("index", { weather: null, error: null });
+});
+
+app.post("/", async (req, res) => {
+  const { city } = req.body;
+  const { weather, error } = await weatherRequest(city);
+  res.render("index", { weather, error });
 });
 
 app.listen(3000, () => {
-  console.log("listening on 3000");
+  console.log("Server has started on port 3000...");
 });
